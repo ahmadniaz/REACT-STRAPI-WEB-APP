@@ -1,4 +1,4 @@
-import React, { useContext} from 'react';
+import React, { useContext, useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from "@material-ui/styles";
 import { NavLink, Link } from 'react-router-dom';
@@ -9,9 +9,14 @@ import BuyIcon from '../../Assets/svg/BuyIcon.svg'
 const BestSellerProducts = () => {
 
     const productContext = useContext(ProductContext);
-    const { products } = productContext;
+    const { products, getProducts } = productContext;
 
-    
+
+    useEffect(() => {
+        getProducts();
+        //eslint-disable-next-line
+    }, [])
+    console.log(products, 'in bestseller')
     const useStyles = makeStyles(theme => ({
         mainGrid: {
             marginRight: '80px',
@@ -155,9 +160,7 @@ const BestSellerProducts = () => {
 
                 ))}
             </Grid>
-
         </div>
     )
 }
-
 export default BestSellerProducts;

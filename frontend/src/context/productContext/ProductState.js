@@ -38,10 +38,10 @@ const ProductState = (props) => {
     };
     const [state, dispatch] = useReducer(productReducer, initialState);
 
-    const getProducts = () => {
+    const getProducts = async () => {
         try {
 
-            const res = axios.get(`http://localhost:1337/products`)
+            const res = await axios.get(`http://localhost:1337/products`)
 
             dispatch({
                 type: GET_PRODUCTS,
@@ -123,7 +123,9 @@ const ProductState = (props) => {
     }
 
     //For increasing products
-    const doIncrement = (num, clickedProduct) => {
+    const doIncrement = async (num, clickedProduct) => {
+        console.log(num, 'in increment')
+        console.log(clickedProduct, 'in inc')
         dispatch({
             type: INCREMENT,
             payload: {
@@ -134,7 +136,7 @@ const ProductState = (props) => {
     }
 
     //For decreasing Products
-    const doDecrement = (num, clickedProduct) => {
+    const doDecrement = async (num, clickedProduct) => {
         if (num === 1) {
             alert('Minumum Limit Reached')
         }
@@ -187,12 +189,14 @@ const ProductState = (props) => {
 
     // For Removing Item from Cart
 
-    const removeCartItem = (id, total) => {
+    const removeCartItem = (product, num, total) => {
+        console.log(product, 'product')
         dispatch({
             type: REMOVE_FROM_CART,
             payload: {
-                id,
-                total
+                product,
+                total,
+                num
             }
         })
     }

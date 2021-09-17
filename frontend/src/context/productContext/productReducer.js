@@ -110,17 +110,18 @@ const productReducer = (state, action) => {
                 loading: true
             }
         case ADD_TO_CART:
-
+            let newItem = action.payload
             let productExist = state.cartItems.find(item => action.payload.product.id === item.product.id)
             if (productExist) {
-                productExist.num += 1;
+                newItem.num += 1;
                 return {
                     ...state,
+                    num: newItem.num,
                     total: state.total + (productExist.product.price * productExist.num)
                 }
             }
             else {
-                console.log(action.payload.num, 'num')
+
                 state.cartItems.push({
                     num: action.payload.num,
                     product: action.payload.product
@@ -131,21 +132,20 @@ const productReducer = (state, action) => {
                     ...state,
                     cartItems: state.cartItems,
                     loading: false,
-                    total: newTotal
+                    total: newTotal,
+                    num: 1
 
                 }
             }
 
+
         case REMOVE_FROM_CART:
-            console.log(state.cartItems[0].product.id, 'inside reducer')
-            console.log(action.payload, 'action')
-            console.log(state.products, 'prod')
             let newProd = state.products.find(x => x.product.product.id === action.payload.id);
             console.log(newProd, 'new prod')
             return {
                 ...state,
-                cartItems: state.cartItems.filter(product => product.product.id !== action.payload.id),
-                // total: state.total - (state.cartItems.product.price)
+                cartItems: state.cartItems.filter(product => product.product.id !== action.payload.product.id),
+                total: state.total - (action.payload.product.price * action.payload.num)
             }
 
         default:

@@ -139,13 +139,13 @@ const ProductDescription = () => {
                             <div style={{ display: 'flex' }}>
                                 <p className={classes.firstHeading}>Quantity:</p>
                                 <div style={{ textAlign: 'center' }}>
-                                    <RemoveIcon style={{ cursor: 'pointer' }} onClick={() => doDecrement(num, curProd)} />
+                                    <RemoveIcon style={{ cursor: 'pointer' }} onClick={() => doDecrement(num = curProd.quantity, curProd)} />
                                     <input
                                         className={classes.input}
-                                        type='text' value={num}
+                                        type='text' value={curProd.quantity}
                                         onChange={handleInputChange}
                                     />
-                                    <AddIcon style={{ cursor: 'pointer' }} onClick={() => doIncrement(num, curProd)} />
+                                    <AddIcon style={{ cursor: 'pointer' }} onClick={() => doIncrement(num = curProd.quantity, curProd)} />
                                 </div>
                             </div>
                             <Grid container>
@@ -154,7 +154,7 @@ const ProductDescription = () => {
                                 </Grid>
                                 <Grid item xs={4} style={{ textAlign: 'end', marginLeft: '25%' }}>
                                     <Link className={classes.tab} as={NavLink} to='/cart'>
-                                        <Button variant="outlined" className={classes.button} onClick={() => handleAddToCart(curProd.id, num, total)}>
+                                        <Button variant="outlined" className={classes.button} onClick={() => handleAddToCart(curProd.id, num = curProd.quantity, total)}>
                                             <span> ADD TO CART </span>
                                         </Button >
                                     </Link>

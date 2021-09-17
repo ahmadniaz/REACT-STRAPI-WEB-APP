@@ -18,7 +18,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 const ProductItems = () => {
     const productLimit = 8;
     const productContext = useContext(ProductContext);
-    const { min, max, category, sort, sortProducts, handleProductClick, clicked, handleClickState, clearFilter } = productContext;
+    const { min, max, category, sort, sortProducts, handleProductClick,
+        clicked, handleClickState, clearFilter, handleAddToCart, total, num } = productContext;
     const [sliced1, setSliced1] = useState(0)
     const [products, setProducts] = useState([])
     const [sliced2, setSliced2] = useState(productLimit)
@@ -26,6 +27,8 @@ const ProductItems = () => {
     const [loading, setLoading] = useState(false)
 
 
+    console.log(num, 'item num')
+    console.log(total, 'num total')
     const handleChange = (e, value) => {
 
         e.preventDefault()
@@ -154,11 +157,14 @@ const ProductItems = () => {
                                     <p className={classes.productPrice} >${product.price}</p>
                                 </Grid>
                                 <Grid item xs={2}>
-                                    <img alt="Cart Icon" className={classes.bagIcon} src={BuyIcon} />
+                                    <Link className={classes.tab} as={NavLink} to='/cart'>
+                                        <img alt="Cart Icon" className={classes.bagIcon} src={BuyIcon}
+                                            onClick={() => handleAddToCart(product.id, num, total)}
+                                        />
+                                    </Link>
                                 </Grid>
                             </div>
                         </Grid>
-
                     ))}
                 </Grid>
             }

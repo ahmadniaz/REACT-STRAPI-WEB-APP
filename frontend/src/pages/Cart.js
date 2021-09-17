@@ -106,7 +106,7 @@ const Cart = () => {
     const classes = useStyles();
     return (
         <>
-            {!loading && cartItems && cartItems.length === 0 ? (<EmptyCart />) :
+            {!loading && cartItems && cartItems.length === 0 && total <= 0 ? (<EmptyCart />) :
                 <div>
                     <Grid container className={classes.mainDiv}>
                         <Grid xs={1}></Grid>
@@ -145,7 +145,7 @@ const Cart = () => {
                                     <RemoveIcon style={{ cursor: 'pointer' }} onClick={() => doDecrement(num, clickedProduct)} />
                                     <input
                                         className={classes.input}
-                                        type='text' value={num}
+                                        type='text' value={item.num}
                                         onChange={handleInputChange}
                                     />
                                     <AddIcon style={{ cursor: 'pointer' }} onClick={() => doIncrement(num, clickedProduct)} />
@@ -154,7 +154,7 @@ const Cart = () => {
                                     <h1 className={classes.price}> ${item && item.product.price}.00</h1>
                                 </Grid>
                                 <Grid item xs={2} style={{ textAlign: 'center' }}>
-                                    <img alt="Delete" src={DeleteIcon} className={classes.deleteIcon} onClick={() => removeCartItem(item.product.id)} />
+                                    <img alt="Delete" src={DeleteIcon} className={classes.deleteIcon} onClick={() => removeCartItem(item.product, num)} />
                                 </Grid>
                             </Grid>
                             <hr />
