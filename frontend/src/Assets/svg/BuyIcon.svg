@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="76" height="76" viewBox="0 0 76 76">
+  <defs>
+    <filter id="Rectangle_71" x="0" y="0" width="76" height="76" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Buy_Icon" data-name="Buy Icon" transform="translate(-864 -4994)">
+    <g transform="matrix(1, 0, 0, 1, 864, 4994)" filter="url(#Rectangle_71)">
+      <g id="Rectangle_71-2" data-name="Rectangle 71" transform="translate(9 6)" fill="none" stroke="#03235a" stroke-width="2">
+        <rect width="58" height="58" rx="29" stroke="none"/>
+        <rect x="1" y="1" width="56" height="56" rx="28" fill="none"/>
+      </g>
+    </g>
+    <path id="shopping-bag" d="M24.682,27.587,22.514,6.941a.849.849,0,0,0-.844-.76H17.6V5.252a5.252,5.252,0,0,0-10.5,0v.929H3.016a.849.849,0,0,0-.844.76L0,27.587a.849.849,0,0,0,.844.938h22.99a.849.849,0,0,0,.845-.938ZM8.789,5.252a3.554,3.554,0,0,1,7.109,0v.929H8.789Zm-7,21.574L3.781,7.879h3.31V9.75a.849.849,0,0,0,1.7,0V7.879H15.9V9.75a.849.849,0,1,0,1.7,0V7.879h3.31L22.9,26.826Zm0,0" transform="translate(890 5015)" fill="#03235a"/>
+  </g>
+</svg>

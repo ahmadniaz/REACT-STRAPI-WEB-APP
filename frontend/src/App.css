@@ -1,0 +1,15 @@
+.App {
+  text-align: center;
+}
+.carousel-control-next {
+  color: blue !important;
+}
+.carousel-control-prev {
+  color: blue !important;
+}
+.css-10p2e9r {
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: translateX(-50%);
+}

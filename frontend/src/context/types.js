@@ -1,0 +1,21 @@
+//Product Types
+export const GET_PRODUCTS = 'GET_PRODUCTS';
+export const PRODUCTS_ERROR = 'PRODUCTS-ERROR';
+export const FILTER_MIN_PRODUCTS = 'FILTER_MIN_PRODUCTS'
+export const FILTER_MAX_PRODUCTS = 'FILTER_MAX_PRODUCTS'
+export const FILTER_CATEGORY = 'FILTER_CATEGORY'
+export const SORT_PRODUCTS = 'SORT_PRODUCTS'
+export const CLEAR_FILTER = 'CLEAR_FILTER'
+export const SET_LOADING = 'SET_LOADING'
+export const CHANGE_FILTER_STATE = 'CHANGE_FILTER_STATE'
+export const FILTER_CLICK = 'FILTER_CLICK'
+export const PRODUCT_DETAILS = 'PRODUCT_DETAILS'
+export const INCREMENT = 'INCREMENT'
+export const DECREMENT = 'DECREMENT'
+export const INPUT_CHANGE = 'INPUT_CHANGE'
+export const ADD_TO_CART = 'ADD_TO_CART'
+export const REMOVE_FROM_CART = 'REMOVE_FROM_CART'
+
+//Blogs Types
+export const GET_BLOGS = 'GET_BLOGS';
+export const BLOG_CLICK = 'BLOG_CLICK';
