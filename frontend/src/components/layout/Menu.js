@@ -1,15 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import { makeStyles } from "@material-ui/styles";
+import Badge from '@material-ui/core/Badge';
+// import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Grid from '@material-ui/core/Grid';
 import LogoCropped from '../../Assets/LogoCropped.png';
 import WaveTop from '../../Assets/WaveTop.png';
-import Cart from '../../Assets/svg/Cart.svg'
+import { withStyles } from '@material-ui/core/styles';
+import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '../../Assets/svg/SearchIcon.svg'
 import { NavLink, Link } from 'react-router-dom';
 import Breadcrumb from "../breadcrumb/Breadcrumb";
+import ProductContext from "../../context/productContext/productContext";
+import Cart from '../../Assets/Cart.png'
 
 
 
@@ -26,6 +31,15 @@ function ElevationScroll(props) {
         elevation: trigger ? 4 : 0,
     });
 }
+
+const StyledBadge = withStyles((theme) => ({
+    badge: {
+        right: 1,
+        top: 6,
+        border: `2px solid ${theme.palette.primary.dark}`,
+        padding: '0 4px',
+    },
+}))(Badge);
 
 const useStyles = makeStyles(theme => ({
 
@@ -70,6 +84,8 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function Menu(props) {
+    const productContext = useContext(ProductContext);
+    const { cartItems } = productContext
     const [upperCase, setUpperCase] = useState('')
     const getPageName = () => {
         const path = window.location.pathname;
@@ -102,7 +118,11 @@ export default function Menu(props) {
                         <Link className={classes.tab} as={NavLink} to='/login'>Login</Link>
                         <img alt='Search Icon' src={SearchIcon} className={classes.cart} />
                         <Link className={classes.tab} as={NavLink} to='/cart'>
-                            <img alt='Cart Icon' src={Cart} className={classes.cart} />
+                            <IconButton aria-label="cart" style={{ marginRight: '2%' }} >
+                                <StyledBadge badgeContent={cartItems.length} color="secondary">
+                                    <img alt="Cart Icon" src={Cart} />
+                                </StyledBadge>
+                            </IconButton>
                         </Link>
                     </Toolbar>
                     <h1 className={classes.pageName}>{upperCase}</h1>

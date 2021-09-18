@@ -1,5 +1,5 @@
 
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from "@material-ui/styles";
 import ProductContext from '../context/productContext/productContext';
@@ -10,9 +10,23 @@ import { Link, NavLink } from 'react-router-dom'
 
 const ProductDescription = () => {
     const productContext = useContext(ProductContext);
-    const { clickedProduct, doIncrement, num, doDecrement, handleInputChange, handleAddToCart, total } = productContext;
+    const { clickedProduct, handleInputChange, handleAddToCart, total } = productContext;
     const [curProd, setCurProd] = useState(clickedProduct)
+    const [value, setValue] = useState(1)
 
+    const doIncrement = () => {
+        setValue(value + 1)
+    }
+
+    const doDecrement = () => {
+
+        if (value === 1) {
+            alert("Minimum Limit reached")
+        }
+        else {
+            setValue(value - 1)
+        }
+    }
 
     // useEffect(() => {
     //     const localProducts = JSON.parse(localStorage.getItem("curProd")) || [];
@@ -139,13 +153,13 @@ const ProductDescription = () => {
                             <div style={{ display: 'flex' }}>
                                 <p className={classes.firstHeading}>Quantity:</p>
                                 <div style={{ textAlign: 'center' }}>
-                                    <RemoveIcon style={{ cursor: 'pointer' }} onClick={() => doDecrement(num = curProd.quantity, curProd)} />
+                                    <RemoveIcon style={{ cursor: 'pointer' }} onClick={doDecrement} />
                                     <input
                                         className={classes.input}
-                                        type='text' value={curProd.quantity}
+                                        type='text' value={value}
                                         onChange={handleInputChange}
                                     />
-                                    <AddIcon style={{ cursor: 'pointer' }} onClick={() => doIncrement(num = curProd.quantity, curProd)} />
+                                    <AddIcon style={{ cursor: 'pointer' }} onClick={doIncrement} />
                                 </div>
                             </div>
                             <Grid container>
@@ -154,7 +168,7 @@ const ProductDescription = () => {
                                 </Grid>
                                 <Grid item xs={4} style={{ textAlign: 'end', marginLeft: '25%' }}>
                                     <Link className={classes.tab} as={NavLink} to='/cart'>
-                                        <Button variant="outlined" className={classes.button} onClick={() => handleAddToCart(curProd.id, num = curProd.quantity, total)}>
+                                        <Button variant="outlined" className={classes.button} onClick={() => handleAddToCart(curProd.id, value, total)}>
                                             <span> ADD TO CART </span>
                                         </Button >
                                     </Link>

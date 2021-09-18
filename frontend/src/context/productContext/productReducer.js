@@ -14,7 +14,9 @@ import {
     INPUT_CHANGE,
     ADD_TO_CART,
     REMOVE_FROM_CART,
-    SET_LOADING
+    SET_LOADING,
+    CART_INCREMENT,
+    CART_DECREMENT
 
 } from '../types';
 
@@ -81,8 +83,6 @@ const productReducer = (state, action) => {
             }
 
         case INCREMENT:
-
-            console.log(state.total + action.payload.clickedProduct.price, 'total')
             return {
                 ...state,
                 num: action.payload.num,
@@ -91,12 +91,24 @@ const productReducer = (state, action) => {
             }
 
         case DECREMENT:
-            console.log(action.payload.clickedProduct, 'decrement')
-            console.log(state.total - action.payload.clickedProduct.price, 'total')
             return {
                 ...state,
                 num: action.payload.num,
                 total: state.total - action.payload.clickedProduct.price
+            }
+
+        case CART_INCREMENT:
+            return {
+                ...state,
+                num: action.payload.quantity,
+                total: state.total + action.payload.prod.price
+            }
+
+        case CART_DECREMENT:
+            return {
+                ...state,
+                num: action.payload.quantity,
+                total: state.total - action.payload.prod.price
             }
         case INPUT_CHANGE:
             return {
@@ -110,38 +122,37 @@ const productReducer = (state, action) => {
                 loading: true
             }
         case ADD_TO_CART:
-            let newItem = action.payload
             let productExist = state.cartItems.find(item => action.payload.product.id === item.product.id)
-            if (productExist) {
-                newItem.num += 1;
-                return {
-                    ...state,
-                    num: newItem.num,
-                    total: state.total + (productExist.product.price * productExist.num)
-                }
-            }
-            else {
-
+            if (!productExist) {
                 state.cartItems.push({
                     num: action.payload.num,
                     product: action.payload.product
                 })
                 let newTotal = state.total + (action.payload.product.price * action.payload.num)
-
                 return {
                     ...state,
                     cartItems: state.cartItems,
                     loading: false,
                     total: newTotal,
-                    num: 1
+                    num: action.payload.num
 
                 }
+
             }
+
+
+            return {
+                ...state,
+                num: action.payload.num,
+                total: state.total + (productExist.product.price * productExist.num)
+            }
+
 
 
         case REMOVE_FROM_CART:
             let newProd = state.products.find(x => x.product.product.id === action.payload.id);
             console.log(newProd, 'new prod')
+            console.log(state.total)
             return {
                 ...state,
                 cartItems: state.cartItems.filter(product => product.product.id !== action.payload.product.id),

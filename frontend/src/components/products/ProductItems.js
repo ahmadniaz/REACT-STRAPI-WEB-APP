@@ -26,7 +26,6 @@ const ProductItems = () => {
     const [noOfPages, setNoOfPages] = useState(products && products.length / productLimit)
     const [loading, setLoading] = useState(false)
 
-
     console.log(num, 'item num')
     console.log(total, 'num total')
     const handleChange = (e, value) => {
@@ -159,7 +158,7 @@ const ProductItems = () => {
                                 <Grid item xs={2}>
                                     <Link className={classes.tab} as={NavLink} to='/cart'>
                                         <img alt="Cart Icon" className={classes.bagIcon} src={BuyIcon}
-                                            onClick={() => handleAddToCart(product.id, num, total)}
+                                            onClick={() => handleAddToCart(product.id, num)}
                                         />
                                     </Link>
                                 </Grid>

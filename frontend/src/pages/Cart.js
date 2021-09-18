@@ -12,9 +12,9 @@ import EmptyCart from '../components/emptycart/emptyCart'
 const Cart = () => {
 
     const productContext = useContext(ProductContext);
-    const { doDecrement, doIncrement, handleInputChange, cartItems,
-        removeCartItem, loading, total, num, clickedProduct } = productContext;
-    console.log(clickedProduct, 'in cart file')
+    const { doCartDecrement, doCartIncrement, handleInputChange, cartItems,
+        removeCartItem, loading, total, clickedProduct } = productContext;
+    console.log(total, 'in cart file')
     useEffect(() => {
         //eslint-disable-next-line
     }, [])
@@ -106,7 +106,7 @@ const Cart = () => {
     const classes = useStyles();
     return (
         <>
-            {!loading && cartItems && cartItems.length === 0 && total <= 0 ? (<EmptyCart />) :
+            {!loading && cartItems && cartItems.length === 0 && total === 0 ? <EmptyCart /> :
                 <div>
                     <Grid container className={classes.mainDiv}>
                         <Grid xs={1}></Grid>
@@ -142,19 +142,19 @@ const Cart = () => {
                             </Grid>
                             <Grid Grid item xs={6} style={{ display: 'flex', justifyContent: 'space-evenly', alignSelf: 'center' }}>
                                 <Grid item xs={3} style={{ alignSelf: 'center' }} >
-                                    <RemoveIcon style={{ cursor: 'pointer' }} onClick={() => doDecrement(num, clickedProduct)} />
+                                    <RemoveIcon style={{ cursor: 'pointer' }} onClick={() => doCartDecrement(item.num, item.product)} />
                                     <input
                                         className={classes.input}
                                         type='text' value={item.num}
                                         onChange={handleInputChange}
                                     />
-                                    <AddIcon style={{ cursor: 'pointer' }} onClick={() => doIncrement(num, clickedProduct)} />
+                                    <AddIcon style={{ cursor: 'pointer' }} onClick={() => doCartIncrement(item.num, item.product)} />
                                 </Grid>
                                 <Grid item xs={1} style={{ alignSelf: 'center' }}>
                                     <h1 className={classes.price}> ${item && item.product.price}.00</h1>
                                 </Grid>
                                 <Grid item xs={2} style={{ textAlign: 'center' }}>
-                                    <img alt="Delete" src={DeleteIcon} className={classes.deleteIcon} onClick={() => removeCartItem(item.product, num)} />
+                                    <img alt="Delete" src={DeleteIcon} className={classes.deleteIcon} onClick={() => removeCartItem(item.product, item.num)} />
                                 </Grid>
                             </Grid>
                             <hr />

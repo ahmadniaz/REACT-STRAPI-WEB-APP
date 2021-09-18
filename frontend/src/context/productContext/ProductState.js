@@ -18,7 +18,9 @@ import {
     INPUT_CHANGE,
     ADD_TO_CART,
     REMOVE_FROM_CART,
-    SET_LOADING
+    SET_LOADING,
+    CART_INCREMENT,
+    CART_DECREMENT
 } from '../types';
 
 const ProductState = (props) => {
@@ -32,7 +34,7 @@ const ProductState = (props) => {
         error: null,
         clickedProduct: '',
         loading: false,
-        num: 1,
+        num: 0,
         cartItems: [],
         total: 0
     };
@@ -187,6 +189,38 @@ const ProductState = (props) => {
         }
     }
 
+    // For handling increment in tha Cart Page 
+
+    const doCartIncrement = (quantity, prod) => {
+        console.log(quantity, 'cart Increment')
+        console.log(prod, 'cart Increment')
+
+        dispatch({
+            type: CART_INCREMENT,
+            payload: {
+                quantity: quantity + 1,
+                prod
+            }
+        })
+    }
+
+    // For handling Decrement in the cart page
+
+    const doCartDecrement = (quantity, prod) => {
+        if (quantity === 1) {
+            alert("Minimum limit reached")
+        }
+        else {
+
+            dispatch({
+                type: CART_DECREMENT,
+                payload: {
+                    quantity: quantity - 1,
+                    prod
+                }
+            })
+        }
+    }
     // For Removing Item from Cart
 
     const removeCartItem = (product, num, total) => {
@@ -230,8 +264,9 @@ const ProductState = (props) => {
                 doDecrement,
                 handleInputChange,
                 handleAddToCart,
-                removeCartItem
-
+                removeCartItem,
+                doCartIncrement,
+                doCartDecrement
 
             }}
         >

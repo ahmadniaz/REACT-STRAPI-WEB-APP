@@ -15,6 +15,8 @@ export const DECREMENT = 'DECREMENT'
 export const INPUT_CHANGE = 'INPUT_CHANGE'
 export const ADD_TO_CART = 'ADD_TO_CART'
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART'
+export const CART_INCREMENT = 'CART_INCREMENT'
+export const CART_DECREMENT = 'CART_DECREMENT'
 
 //Blogs Types
 export const GET_BLOGS = 'GET_BLOGS';
