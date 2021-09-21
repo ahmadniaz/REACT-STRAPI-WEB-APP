@@ -19,15 +19,13 @@ const ProductItems = () => {
     const productLimit = 8;
     const productContext = useContext(ProductContext);
     const { min, max, category, sort, sortProducts, handleProductClick,
-        clicked, handleClickState, clearFilter, handleAddToCart, total, num } = productContext;
+        clicked, handleClickState, clearFilter, handleAddToCart } = productContext;
     const [sliced1, setSliced1] = useState(0)
     const [products, setProducts] = useState([])
     const [sliced2, setSliced2] = useState(productLimit)
     const [noOfPages, setNoOfPages] = useState(products && products.length / productLimit)
     const [loading, setLoading] = useState(false)
 
-    console.log(num, 'item num')
-    console.log(total, 'num total')
     const handleChange = (e, value) => {
 
         e.preventDefault()
@@ -158,7 +156,7 @@ const ProductItems = () => {
                                 <Grid item xs={2}>
                                     <Link className={classes.tab} as={NavLink} to='/cart'>
                                         <img alt="Cart Icon" className={classes.bagIcon} src={BuyIcon}
-                                            onClick={() => handleAddToCart(product.id, num)}
+                                            onClick={() => handleAddToCart(product.id, product.quantity)}
                                         />
                                     </Link>
                                 </Grid>

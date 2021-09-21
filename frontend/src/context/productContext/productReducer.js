@@ -58,11 +58,6 @@ const productReducer = (state, action) => {
                 ...state,
                 sort: action.payload
             }
-        case PRODUCT_DETAILS:
-            return {
-                ...state,
-                clickedProduct: action.payload
-            }
         case FILTER_CLICK:
             return {
                 ...state,
@@ -74,12 +69,24 @@ const productReducer = (state, action) => {
                 clicked: action.payload
             }
 
+        case SET_LOADING:
+            return {
+                ...state,
+                loading: true
+            }
+
         case CLEAR_FILTER:
             return {
                 ...state,
                 min: '',
                 max: '',
                 category: 'all',
+            }
+
+        case PRODUCT_DETAILS:
+            return {
+                ...state,
+                clickedProduct: action.payload
             }
 
         case INCREMENT:
@@ -98,29 +105,42 @@ const productReducer = (state, action) => {
             }
 
         case CART_INCREMENT:
+            const modifiedCartItems = state.cartItems.map(item => {
+                if (item.product.id === action.payload.prod.id)
+                    return {
+                        num: item.num + 1,
+                        product: item.product
+                    }
+                return item
+            })
             return {
                 ...state,
-                num: action.payload.quantity,
+                cartItems: modifiedCartItems,
                 total: state.total + action.payload.prod.price
             }
 
         case CART_DECREMENT:
+            const modifiedCartItem = state.cartItems.map(item => {
+                if (item.product.id === action.payload.prod.id)
+                    return {
+                        num: item.num - 1,
+                        product: item.product
+                    }
+                return item
+            })
+            console.log(modifiedCartItem, 'got this mfk!')
             return {
                 ...state,
-                num: action.payload.quantity,
+                cartItems: modifiedCartItem,
                 total: state.total - action.payload.prod.price
             }
+
         case INPUT_CHANGE:
             return {
                 ...state,
                 num: action.payload.num,
+            }
 
-            }
-        case SET_LOADING:
-            return {
-                ...state,
-                loading: true
-            }
         case ADD_TO_CART:
             let productExist = state.cartItems.find(item => action.payload.product.id === item.product.id)
             if (!productExist) {
@@ -135,19 +155,15 @@ const productReducer = (state, action) => {
                     loading: false,
                     total: newTotal,
                     num: action.payload.num
-
                 }
 
             }
-
 
             return {
                 ...state,
                 num: action.payload.num,
                 total: state.total + (productExist.product.price * productExist.num)
             }
-
-
 
         case REMOVE_FROM_CART:
             let newProd = state.products.find(x => x.product.product.id === action.payload.id);

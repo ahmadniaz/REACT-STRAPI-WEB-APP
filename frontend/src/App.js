@@ -6,6 +6,7 @@ import { theme } from './components/Theme';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Menu from './components/layout/Menu';
 import Store from './pages/Store';
+import ProductDescription from './pages/ProductDescription'
 import TermsOfServices from './pages/TermsOfServices';
 import FAQs from './pages/FAQ';
 import PrivacyPolicy from './pages/PrivacyPolicy';
@@ -17,7 +18,6 @@ import Blog from './pages/Blog';
 import Footer from './components/layout/Footer';
 import ScrollToTop from './components/scroll/Scroll';
 import SingleBlog from './pages/SingleBlog'
-import ProductDescription from './pages/ProductDescription'
 import Cart from './pages/Cart'
 
 import ProductState from './context/productContext/ProductState';

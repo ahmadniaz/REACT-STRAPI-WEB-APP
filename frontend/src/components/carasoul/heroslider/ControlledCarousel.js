@@ -16,7 +16,7 @@ const ControlledCarousel = () => {
   return (
     <Grid container >
       <Grid item xs={12}>
-        <Carousel controls={false} interval={null} activeIndex={index} onSelect={handleSelect}>
+        <Carousel controls={false} interval={5000} activeIndex={index} onSelect={handleSelect}>
           <Carousel.Item>
             <Slide />
           </Carousel.Item>

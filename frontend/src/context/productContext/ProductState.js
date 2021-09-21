@@ -90,16 +90,6 @@ const ProductState = (props) => {
         })
     }
 
-    // Getting  single product on click
-
-    const handleProductClick = (product) => {
-        dispatch({
-            type: PRODUCT_DETAILS,
-            payload: product
-        })
-    }
-
-
     //handling filter button 
     const handleFilterClick = () => {
         dispatch({
@@ -124,10 +114,18 @@ const ProductState = (props) => {
         })
     }
 
+    // Getting  single product on click
+
+    const handleProductClick = (product) => {
+        dispatch({
+            type: PRODUCT_DETAILS,
+            payload: product
+        })
+    }
+
+
     //For increasing products
     const doIncrement = async (num, clickedProduct) => {
-        console.log(num, 'in increment')
-        console.log(clickedProduct, 'in inc')
         dispatch({
             type: INCREMENT,
             payload: {
@@ -149,11 +147,8 @@ const ProductState = (props) => {
                     num: num - 1,
                     clickedProduct
                 }
-
-
             })
         }
-
     }
 
     //for loading
@@ -198,7 +193,7 @@ const ProductState = (props) => {
         dispatch({
             type: CART_INCREMENT,
             payload: {
-                quantity: quantity + 1,
+                quantity: quantity,
                 prod
             }
         })
@@ -215,7 +210,7 @@ const ProductState = (props) => {
             dispatch({
                 type: CART_DECREMENT,
                 payload: {
-                    quantity: quantity - 1,
+                    quantity: quantity,
                     prod
                 }
             })
@@ -244,12 +239,12 @@ const ProductState = (props) => {
                 clicked: state.clicked,
                 category: state.category,
                 checked: state.checked,
+                total: state.total,
                 clickedProduct: state.clickedProduct,
                 value: state.value,
                 num: state.num,
                 cartItems: state.cartItems,
                 loading: state.loading,
-                total: state.total,
                 getProducts,
                 sortProducts,
                 setLoading,

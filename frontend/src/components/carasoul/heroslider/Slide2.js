@@ -115,7 +115,9 @@ const Slide2 = () => {
             height: '70%'
         },
         buttonText: {
-            fontSize: '16px'
+            fontSize: '16px',
+            color: theme.palette.primary.light,
+            fontWeight: 'bold'
         },
         arrowDiv: {
             display: 'flex',

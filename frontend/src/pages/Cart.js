@@ -13,8 +13,9 @@ const Cart = () => {
 
     const productContext = useContext(ProductContext);
     const { doCartDecrement, doCartIncrement, handleInputChange, cartItems,
-        removeCartItem, loading, total, clickedProduct } = productContext;
+        removeCartItem, loading, total, num } = productContext;
     console.log(total, 'in cart file')
+    console.log(num, ' in cart file')
     useEffect(() => {
         //eslint-disable-next-line
     }, [])

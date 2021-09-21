@@ -3,6 +3,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import { makeStyles } from "@material-ui/styles";
+import { theme } from '../Theme'
 import Badge from '@material-ui/core/Badge';
 // import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Grid from '@material-ui/core/Grid';
@@ -15,9 +16,6 @@ import { NavLink, Link } from 'react-router-dom';
 import Breadcrumb from "../breadcrumb/Breadcrumb";
 import ProductContext from "../../context/productContext/productContext";
 import Cart from '../../Assets/Cart.png'
-
-
-
 
 
 
@@ -72,7 +70,8 @@ const useStyles = makeStyles(theme => ({
         minWidth: 10,
         marginLeft: "25px",
         height: "1em",
-        marginTop: '2px'
+        marginTop: '2px',
+        cursor: 'pointer'
     },
     pageName: {
         marginLeft: '10%',
@@ -87,6 +86,7 @@ export default function Menu(props) {
     const productContext = useContext(ProductContext);
     const { cartItems } = productContext
     const [upperCase, setUpperCase] = useState('')
+    const [open, setOpen] = useState(false)
     const getPageName = () => {
         const path = window.location.pathname;
         const page = path.split("/").pop();
@@ -116,7 +116,14 @@ export default function Menu(props) {
                             <Link className={classes.tab} as={NavLink} to='/contact'> Contact </Link>
                         </div>
                         <Link className={classes.tab} as={NavLink} to='/login'>Login</Link>
-                        <img alt='Search Icon' src={SearchIcon} className={classes.cart} />
+                        {open ?
+                            <div>
+                                <img alt='Search Icon' src={SearchIcon} className={classes.cart} onClick={() => setOpen(!open)} />
+                                <input style={{ borderRadius: '15px', borderColor: theme.palette.secondary.main, boderSize: '0px' }} type='text' placeholder='search....' />
+                            </div>
+                            :
+                            <img alt='Search Icon' src={SearchIcon} className={classes.cart} onClick={() => setOpen(!open)} />
+                        }
                         <Link className={classes.tab} as={NavLink} to='/cart'>
                             <IconButton aria-label="cart" style={{ marginRight: '2%' }} >
                                 <StyledBadge badgeContent={cartItems.length} color="secondary">

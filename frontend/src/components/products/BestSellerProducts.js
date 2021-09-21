@@ -9,14 +9,13 @@ import BuyIcon from '../../Assets/svg/BuyIcon.svg'
 const BestSellerProducts = () => {
 
     const productContext = useContext(ProductContext);
-    const { products, getProducts } = productContext;
+    const { products, getProducts, handleAddToCart, handleProductClick } = productContext;
 
 
     useEffect(() => {
         getProducts();
         //eslint-disable-next-line
     }, [])
-    console.log(products, 'in bestseller')
     const useStyles = makeStyles(theme => ({
         mainGrid: {
             marginRight: '80px',
@@ -117,7 +116,10 @@ const BestSellerProducts = () => {
             borderWidth: '3px ',
             borderColor: theme.palette.secondary.light,
             padding: '5px 35px 5px 35px',
-        }
+        },
+        tab: {
+            textDecoration: 'none'
+        },
     }));
 
     const classes = useStyles();
@@ -139,20 +141,24 @@ const BestSellerProducts = () => {
 
             <Grid container spacing={3}>
                 {products.slice(0, 8).map((product) => (
-
                     <Grid item xs={3} key={product.id} >
-
                         <div className={classes.productDiv}>
                             <img alt="product1" src={`http://localhost:1337${product.image.url}`} style={{ width: '95%', }} />
                         </div>
                         <div style={{ display: 'flex' }}>
 
                             <Grid item xs={10}>
-                                <p className={classes.productTitle}>{product.title}</p>
+                                <Link className={classes.tab} as={NavLink} to='/productdescription'>
+                                    <p className={classes.productTitle} onClick={() => handleProductClick(product)}>{product.title}</p>
+                                </Link>
                                 <p className={classes.productPrice} >${product.price}</p>
                             </Grid>
                             <Grid item xs={2}>
-                                <img alt="Cart Icon" className={classes.bagIcon} src={BuyIcon} />
+                                <Link className={classes.tab} as={NavLink} to='/cart'>
+                                    <img alt="Cart Icon" className={classes.bagIcon} src={BuyIcon}
+                                        onClick={() => handleAddToCart(product.id, product.quantity)}
+                                    />
+                                </Link>
                             </Grid>
 
                         </div>
